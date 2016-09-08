@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 
   def create
   	@user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
+    binding.pry
+    @user.verify_password_confirmation
   	@user.access_token = ApiKey.create.generate_key
   	if @user.save
   		respond_to do |format|
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
 	  	end
   	else
   		respond_to do |format|
-        format.html{redirect_to :index}
+        format.html{redirect_to users_path}
 	  		format.json{render json: @user.errors}
 	  	end
   	end

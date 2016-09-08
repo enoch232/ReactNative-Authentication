@@ -1,0 +1,11 @@
+<html>
+<head>
+	<title>Users List</title>
+</head>
+<body>
+	<% @users.each do |user| %>
+		<div><%= user.email %> <%= user.access_token%></div>
+	<% end %> 
+
+</body>
+</html>

@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160908180638) do
-
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "likes"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+ActiveRecord::Schema.define(version: 20160908180534) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

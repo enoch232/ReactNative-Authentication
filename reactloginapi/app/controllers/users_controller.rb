@@ -12,12 +12,12 @@ class UsersController < ApplicationController
     if @user.save
       respond_to do |format|
         format.html{redirect_to root_path, notice: "User successfully registered!"}
-        format.json
+        format.json{@user.access_token}
       end
     else
       respond_to do |format|
         format.html{render :new, notice: @user.errors}
-        format.json
+        format.json{@user.errors}
       end
     end
   end

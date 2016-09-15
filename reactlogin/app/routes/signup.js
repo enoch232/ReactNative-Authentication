@@ -18,11 +18,10 @@ export default class SignUpPage extends Component{
 	render(){
 		return(
 			<View>
-				<View>
-					<Text>Header</Text>
+				<View style = {styles.container} >
+					<Text style = {{fontSize: 30}}>Sign Up</Text>
 				</View>
-				<View style = {styles.container}>
-					<Text>Sign Up</Text>
+				<View style = {styles.inputContainer}>
 					<Text style = {styles.label} >Name: </Text>
 					<TextInput style = {styles.nameTextInput} value={this.state.name} onChangeText = {(name) => this.setState({name})}/>
 					<Text style = {styles.label}>Email: </Text>
@@ -40,8 +39,17 @@ export default class SignUpPage extends Component{
 const styles = {
 	container:{
 		flex: 1,
+		justifyContent: "center",
+		flexDirection: "column",
+		alignItems: "center",
+		backgroundColor: "coral"
+
+	}
+	,
+	inputContainer:{
+		flex: 1,
 		left: 30,
-		top: 80,
+		top: 60,
 		flexDirection: "column",
 		justifyContent: "center",
 		alignItems: "flex-start"
@@ -53,25 +61,33 @@ const styles = {
 		height:40,
 		borderColor: "gray",
 		borderWidth: 1,
-		width:200
+		width:200,
+		borderRadius: 5,
+		padding: 10
 	},
 	emailTextInput: {
 		height:40,
 		borderColor: "gray",
 		borderWidth: 1,
-		width:200
+		width:200,
+		borderRadius: 5,
+		padding: 10
 	},
 	passwordTextInput: {
 		height:40,
 		borderColor: "gray",
 		borderWidth: 1,
-		width:200
+		width:200,
+		borderRadius: 5,
+		padding: 10
 	},
 	passwordConfirmationTextInput: {
 		height:40,
 		borderColor: "gray",
 		borderWidth: 1,
-		width:200
+		width:200,
+		borderRadius: 5,
+		padding: 10
 	}
 
 

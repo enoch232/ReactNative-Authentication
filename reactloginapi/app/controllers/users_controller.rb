@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(params_user)
     if @user.save
       respond_to do |format|
-        format.html{redirect_to root_path, notice: "User successfully registered!", access: @user.access_token}
+        format.html{render plain: @user.access_token}
         format.json{ render json: @user.access_token}
       end
     else

@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       respond_to do |format|
-        format.html{redirect_to root_path, notice: "User successfully registered!"}
+        format.html{redirect_to root_path, notice: "User successfully signed in!"}
         format.json{@user}
       end
     else

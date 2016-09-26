@@ -29,9 +29,11 @@ export default class SignUpPage extends Component{
 			  	}
 			  })
 			})
-			this.setState({response: "registered!"})
+			let responseJson = await response;
+			this.setState({response: "Registered"})
+			console.log(responseJson)
 		} catch(error){
-			console.error(error)
+			this.setState({response: error})
 		}
 	}
 	render(){

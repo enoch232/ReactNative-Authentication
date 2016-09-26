@@ -19,21 +19,20 @@ class RootPage extends Component{
 				title: "SignUp"
 			})
 		}
-
 	}
 	render(){
 		return(
 		  <View style = {styles.container}>
-	        <Text style={styles.title}>
-	          React Login Apps
-	        </Text>
-	        <TouchableOpacity style = {styles.logInButton} onPress = {this._onPressSignUpButton.bind(this, "SignIn")}>
-	          <Text style = {styles.logInButtonText}>Log In</Text>
-	        </TouchableOpacity>
-	        <TouchableOpacity style = {styles.signUpButton} onPress = {this._onPressSignUpButton.bind(this, "SignUp")}>
-	          <Text style = {styles.signUpButtonText} >Sign Up</Text>
-	        </TouchableOpacity>
-	      </View>
+        <Text style={styles.title}>
+          React Login Apps
+        </Text>
+        <TouchableOpacity style = {styles.logInButton} onPress = {this._onPressSignUpButton.bind(this, "SignIn")}>
+          <Text style = {styles.logInButtonText}>Log In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style = {styles.signUpButton} onPress = {this._onPressSignUpButton.bind(this, "SignUp")}>
+          <Text style = {styles.signUpButtonText} >Sign Up</Text>
+        </TouchableOpacity>
+	     </View>
 		)
 	}
 }

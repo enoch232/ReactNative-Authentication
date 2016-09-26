@@ -12,13 +12,13 @@ class UsersController < ApplicationController
     @user = User.new(params_user)
     if @user.save
       respond_to do |format|
-        format.html{redirect_to root_path, notice: "User successfully registered!"}
-        format.json{@user.access_token}
+        format.html{redirect_to root_path, notice: "User successfully registered!", access: @user.access_token}
+        format.json{ render json: @user.access_token}
       end
     else
       respond_to do |format|
-        format.html{render :new, notice: @user.errors}
-        format.json{@user.errors}
+        format.html{ render :new, notice: @user.errors}
+        format.json{ render json: @user.errors}
       end
     end
   end

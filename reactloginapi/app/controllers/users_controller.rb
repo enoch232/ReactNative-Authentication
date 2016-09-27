@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       respond_to do |format|
         format.html{render plain: @user.access_token}
-        format.json{ render json: @user.access_token}
+        format.json{ render json: @user}
       end
     else
       respond_to do |format|

@@ -1,5 +1,7 @@
 import React, {Component} from "react"
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {
+	AsyncStorage,
 	Navigator,
 	Text,
 	TextInput,
@@ -11,35 +13,42 @@ export default class SignUpPage extends Component{
 	constructor(props){
 		super(props)
 		this.state = {name:"", email: "", password:"", passwordConfirmation: ""}
+
 	}
-	async _signupPress(){
-		try{
-			let response = await fetch('http://localhost:3000/users', {
-			  method: 'POST',
-			  headers: {
-			    'Accept': 'application/json',
-			    'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify({
-			  	user:{
+	_signupPress() {
+    	return fetch('http://localhost:3000/users', {
+			method: 'POST',
+			headers: {
+			  'Accept':"application/json",
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				user:{
 			  		name: this.state.name,
 				    email: this.state.email,
 				    password: this.state.password,
 				    password_confirmation: this.state.passwordConfirmation
 			  	}
-			  })
 			})
-			let responseJson = await response;
-			this.setState({response: "Registered"})
-			console.log(responseJson)
-		} catch(error){
-			this.setState({response: error})
-		}
-	}
+		})
+      	.then((response) => {
+      		return response.json()
+      	})
+      	.then((response)=>{
+      		this.setState({response: "Successfully Registered!"})
+      		AsyncStorage.setItem("access_token", response.access_token)
+      	})
+
+      	.catch((error) => {
+        	console.error(error)
+      	})
+  	}
+	
 	render(){
 		return(
 			<View>
 				<View style = {styles.container} >
+					<Icon name = "chevron-left" size = {30}/>
 					<Text style = {{fontSize: 30}}>Sign Up</Text>
 				</View>
 				<View style = {styles.inputContainer}>

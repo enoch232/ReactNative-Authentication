@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {
 	AsyncStorage,
 	Navigator,
@@ -13,6 +13,10 @@ export default class SignUpPage extends Component{
 	constructor(props){
 		super(props)
 		this.state = {name:"", email: "", password:"", passwordConfirmation: ""}
+
+	}
+	_backPress(){
+		this.props.navigator.pop()
 
 	}
 	_signupPress() {
@@ -48,8 +52,12 @@ export default class SignUpPage extends Component{
 		return(
 			<View>
 				<View style = {styles.container} >
-					<Icon name = "chevron-left" size = {30}/>
-					<Text style = {{fontSize: 30}}>Sign Up</Text>
+					<View style = {styles.headerContainer}>
+						<TouchableOpacity onPress = {this._backPress.bind(this)}>
+							<Icon name = "chevron-left" size = {30} style = {styles.backButton} />
+						</TouchableOpacity>
+						<Text style = {{fontSize: 30}}>Sign Up</Text>
+					</View>
 				</View>
 				<View style = {styles.inputContainer}>
 					<Text style = {styles.label} >{this.state.response}</Text>
@@ -77,6 +85,11 @@ const styles = {
 
 	}
 	,
+	headerContainer:{
+		flexDirection: "row",
+		justifyContent: "flex-start",
+		alignItems: "center"
+	},
 	inputContainer:{
 		flex: 1,
 		left: 30,
@@ -87,6 +100,10 @@ const styles = {
 	},
 	label:{
 		textAlign:"left"
+	},
+	backButton:{
+		color: "black",
+		left: -10
 	},
 	nameTextInput: {
 		height:40,

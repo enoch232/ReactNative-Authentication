@@ -12,7 +12,7 @@ import {
 export default class SignInPage extends Component{
 	constructor(props){
 		super(props)
-		this.state = {name: "hello"}
+		this.state = {name: "",password: ""}
 	}
 	_backPress(){
 		this.props.navigator.pop();
@@ -21,7 +21,6 @@ export default class SignInPage extends Component{
 		return fetch('http://localhost:3000/sessions', {
 			method: 'POST',
 			headers: {
-			  'Accept':"application/json",
 			  'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
@@ -32,11 +31,11 @@ export default class SignInPage extends Component{
 			})
 		})
 		.then((response)=>{
-			return response.json()
+			return response
 		})
 		.then((responseJson)=>{
 			console.log("successfully logged in!")
-			console.log(responseJson)
+			console.log(responseJson.json())
 		})
 		.catch((error)=>{
 			console.error(error)
@@ -61,7 +60,6 @@ export default class SignInPage extends Component{
 					<TouchableOpacity style = {styles.signInButton} onPress = {this._loginPress.bind(this)}><Text style = {{textAlign:"center"}}>Sign In</Text></TouchableOpacity>
 				</View>
 			</View>
-
 		)
 	}
 }
@@ -138,7 +136,4 @@ const styles = StyleSheet.create({
 		padding: 10,
 		marginTop: 10
 	}
-
-
-
 })

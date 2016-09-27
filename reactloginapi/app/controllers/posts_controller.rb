@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @access_token = @user.access_token
     @posts = Post.all
   end
 
@@ -14,6 +15,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @access_token = @user.access_token
     @post = Post.new
   end
 
@@ -29,7 +31,7 @@ class PostsController < ApplicationController
     binding.pry
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to root_path(access_token: @user.access_token), notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }

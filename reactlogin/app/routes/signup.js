@@ -6,7 +6,8 @@ import {
 	Text,
 	TextInput,
 	View,
-	TouchableOpacity
+	TouchableOpacity,
+	StyleSheet
 
 }from "react-native";
 export default class SignUpPage extends Component{
@@ -75,7 +76,7 @@ export default class SignUpPage extends Component{
 		)
 	}
 }
-const styles = {
+const styles = StyleSheet.create({
 	container:{
 		flex: 1,
 		justifyContent: "center",
@@ -139,4 +140,4 @@ const styles = {
 	}
 
 
-}
+})

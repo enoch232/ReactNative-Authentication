@@ -20,7 +20,7 @@ export default class SignUpPage extends Component{
 		this.props.navigator.pop()
 
 	}
-	_signupPress() {
+	_signUpPress() {
     	return fetch('http://localhost:3000/users', {
 			method: 'POST',
 			headers: {
@@ -39,9 +39,9 @@ export default class SignUpPage extends Component{
       	.then((response) => {
       		return response.json()
       	})
-      	.then((response)=>{
+      	.then((responseJson)=>{
       		this.setState({response: "Successfully Registered!"})
-      		AsyncStorage.setItem("access_token", response.access_token)
+      		AsyncStorage.setItem("access_token", responseJson.access_token)
       	})
 
       	.catch((error) => {
@@ -70,7 +70,7 @@ export default class SignUpPage extends Component{
 					<TextInput style = {styles.passwordTextInput} secureTextEntry={true} value = {this.state.password} onChangeText = {(password) => this.setState({password})}/>
 					<Text style = {styles.label}>Password Confirmation: </Text>
 					<TextInput style = {styles.passwordConfirmationTextInput} secureTextEntry = {true} value = {this.state.passwordConfirmation} onChangeText = {(passwordConfirmation)=> this.setState({passwordConfirmation})}/>
-					<TouchableOpacity onPress = {this._signupPress.bind(this)}><Text>Sign Up</Text></TouchableOpacity>
+					<TouchableOpacity style = {styles.signUpButton} onPress = {this._signUpPress.bind(this)}><Text style = {{textAlign:"center"}}>Sign Up</Text></TouchableOpacity>
 				</View>
 			</View>
 		)
@@ -137,7 +137,15 @@ const styles = StyleSheet.create({
 		width:200,
 		borderRadius: 5,
 		padding: 10
+	},
+	signUpButton: {
+		height: 40,
+		width: 200,
+		backgroundColor: "skyblue",
+		borderRadius: 5,
+		borderColor: "skyblue",
+		borderWidth: 1,
+		padding: 10,
+		marginTop: 10
 	}
-
-
 })

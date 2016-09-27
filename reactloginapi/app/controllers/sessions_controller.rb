@@ -9,12 +9,12 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       respond_to do |format|
         format.html{redirect_to root_path, notice: "User successfully signed in!"}
-        format.json{@user}
+        format.json{ render json: @user}
       end
     else
       respond_to do |format|
         format.html{render :new, notice: "email or password is incorrect"}
-        format.json{@user.errors}
+        format.json{render json: @user.errors}
       end
     end
   end

@@ -17,6 +17,31 @@ export default class SignInPage extends Component{
 	_backPress(){
 		this.props.navigator.pop();
 	}
+	_loginPress(){
+		return fetch('http://localhost:3000/sessions', {
+			method: 'POST',
+			headers: {
+			  'Accept':"application/json",
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				user:{
+				    email: this.state.email,
+				    password: this.state.password
+			  	}
+			})
+		})
+		.then((response)=>{
+			return response.json()
+		})
+		.then((responseJson)=>{
+			console.log("successfully logged in!")
+			console.log(responseJson)
+		})
+		.catch((error)=>{
+			console.error(error)
+		})
+	}
 	render(){
 		return(
 			<View>
@@ -29,8 +54,11 @@ export default class SignInPage extends Component{
 					</View>
 				</View>
 				<View style = {styles.inputContainer}>
-					<Text style = {styles.label}>Name: </Text>
-					<TextInput style = {styles.nameTextInput} value = {this.state.name} onChangeText = {(name)=>{this.setState({name})}} ></TextInput>
+					<Text style = {styles.label}>Email: </Text>
+					<TextInput style = {styles.emailTextInput} value = {this.state.email} onChangeText = {(email)=>{this.setState({email})}} ></TextInput>
+					<Text style = {styles.label}>Password: </Text>
+					<TextInput style = {styles.passwordTextInput} secureTextEntry={true} value = {this.state.password} onChangeText = {(password)=>{this.setState({password})}}></TextInput> 
+					<TouchableOpacity style = {styles.signInButton} onPress = {this._loginPress.bind(this)}><Text style = {{textAlign:"center"}}>Sign In</Text></TouchableOpacity>
 				</View>
 			</View>
 
@@ -99,6 +127,16 @@ const styles = StyleSheet.create({
 		width:200,
 		borderRadius: 5,
 		padding: 10
+	},
+	signInButton: {
+		height: 40,
+		width: 200,
+		backgroundColor: "skyblue",
+		borderRadius: 5,
+		borderColor: "skyblue",
+		borderWidth: 1,
+		padding: 10,
+		marginTop: 10
 	}
 
 

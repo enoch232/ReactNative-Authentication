@@ -16,6 +16,7 @@ import {
 import RootPage from "./app/routes/root";
 import SignInPage from "./app/routes/signin";
 import SignUpPage from "./app/routes/signup";
+import DashboardPage from "./app/routes/dashboard";
 
 class reactlogin extends Component {
 
@@ -32,6 +33,9 @@ class reactlogin extends Component {
           }
           if (route.title == "SignUp"){
             return <SignUpPage navigator = {navigator}/>
+          }
+          if (route.title = "Dashboard"){
+            return <DashboardPage navigator = {navigator}/>
           }
         }}
       >

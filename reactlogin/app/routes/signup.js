@@ -40,10 +40,20 @@ export default class SignUpPage extends Component{
       		return response.json()
       	})
       	.then((responseJson)=>{
-      		this.setState({response: "Successfully Registered!"})
-      		AsyncStorage.setItem("access_token", responseJson.access_token)
+      		// console.log(responseJson)
+      		if (responseJson.name){
+      			this.setState({response: "Name "+ responseJson.name[0]})
+      		}else if (responseJson.password_confirmation){
+      			this.setState({response: "Password Confirmation " + responseJson.password_confirmation[0]})
+      		}else if (responseJson.email){
+      			this.setState({response: "Email "+ responseJson.email[0]})
+      		}else if (responseJson.password){
+      			this.setState({response: "Password "+ responseJson.password[0]})
+      		}else{
+      			this.setState({response: "Successfully Registered!"})
+      			AsyncStorage.setItem("access_token", responseJson.access_token)
+      		}
       	})
-
       	.catch((error) => {
         	console.error(error)
       	})

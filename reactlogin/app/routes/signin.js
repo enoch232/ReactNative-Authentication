@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 	Navigator,
 	TextInput,
-	A
+	AsyncStorage
 } from "react-native"
 export default class SignInPage extends Component{
 	constructor(props){
@@ -21,6 +21,7 @@ export default class SignInPage extends Component{
 		return fetch('http://localhost:3000/sessions', {
 			method: 'POST',
 			headers: {
+			  'Accept':"application/json",
 			  'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
@@ -31,11 +32,17 @@ export default class SignInPage extends Component{
 			})
 		})
 		.then((response)=>{
-			return response
+			return response.json()
 		})
 		.then((responseJson)=>{
-			console.log("successfully logged in!")
-			console.log(responseJson.json())
+			if (responseJson.error){
+				this.setState({response: responseJson.error})
+			}else{
+				this.setState({response: "Successfully signed in!"})
+				this.props.navigator.push({
+					title: "dashboard"
+				})
+			}
 		})
 		.catch((error)=>{
 			console.error(error)
@@ -53,6 +60,7 @@ export default class SignInPage extends Component{
 					</View>
 				</View>
 				<View style = {styles.inputContainer}>
+					<Text style = {styles.label}>{this.state.response}</Text>
 					<Text style = {styles.label}>Email: </Text>
 					<TextInput style = {styles.emailTextInput} value = {this.state.email} onChangeText = {(email)=>{this.setState({email})}} ></TextInput>
 					<Text style = {styles.label}>Password: </Text>

@@ -39,6 +39,7 @@ export default class SignInPage extends Component{
 				this.setState({response: responseJson.error})
 			}else{
 				this.setState({response: "Successfully signed in!"})
+				AsyncStorage.setItem("access_token", responseJson.access_token)
 				this.props.navigator.push({
 					title: "dashboard"
 				})

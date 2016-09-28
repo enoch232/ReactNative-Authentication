@@ -11,24 +11,21 @@ import {
 	StyleSheet
 
 }from "react-native";
-export default class SignUpPage extends Component{
+
+export default class DashBoardPage extends Component{
 	constructor(props){
 		super(props)
-		const ds = ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-		
-		
+		// const ds = ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
+		this.state = {access_token: ""}
+	}
+	componentDidMount(){
+		AsyncStorage.getItem("access_token").then((value) => {
+	        this.setState({access_token: value})
+	    }).catch((error)=>console.error(error)).done()
 	}
 	_backPress(){
 		this.props.navigator.pop()
 
-	}
-	async _getAccessToken(){
-		try{
-			var access_token = await AsyncStorage.getItem("access_token")
-			this.state.access_token = access_token
-		}catch(error){
-			console.log("Error getting access_token")
-		}
 	}
 	render(){
 		return (
@@ -42,7 +39,6 @@ export default class SignUpPage extends Component{
 					</View>
 				</View>
 				<Text>{this.state.access_token}</Text>
-				<TouchableOpacity onPress = {this._getAccessToken.bind(this)}></TouchableOpacity>
 			</View>
 		)
 	}

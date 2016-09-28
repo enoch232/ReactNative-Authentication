@@ -7,8 +7,8 @@ import {
   Navigator
 }from "react-native";
 
-class RootPage extends Component{
-	_onPressSignUpButton(routeName){
+export default class RootPage extends Component{
+	_onPressButton(routeName){
 		if (routeName == "SignIn"){
 			this.props.navigator.push({
 				title: "SignIn"
@@ -26,10 +26,10 @@ class RootPage extends Component{
         <Text style={styles.title}>
           React Login Apps
         </Text>
-        <TouchableOpacity style = {styles.logInButton} onPress = {this._onPressSignUpButton.bind(this, "SignIn")}>
+        <TouchableOpacity style = {styles.logInButton} onPress = {this._onPressButton.bind(this, "SignIn")}>
           <Text style = {styles.logInButtonText}>Log In</Text>
         </TouchableOpacity>
-        <TouchableOpacity style = {styles.signUpButton} onPress = {this._onPressSignUpButton.bind(this, "SignUp")}>
+        <TouchableOpacity style = {styles.signUpButton} onPress = {this._onPressButton.bind(this, "SignUp")}>
           <Text style = {styles.signUpButtonText} >Sign Up</Text>
         </TouchableOpacity>
 	     </View>
@@ -73,4 +73,3 @@ const styles = StyleSheet.create({
   }
 
 })
-module.exports =  RootPage;

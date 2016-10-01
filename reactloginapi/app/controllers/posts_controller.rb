@@ -28,7 +28,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = @user.id
-    binding.pry
     respond_to do |format|
       if @post.save
         format.html { redirect_to root_path(access_token: @user.access_token), notice: 'Post was successfully created.' }
@@ -66,7 +65,6 @@ class PostsController < ApplicationController
 
   private
     def authenticate_access
-      binding.pry
       @user = User.find_by_access_token(params[:access_token])
       head :unauthorized unless @user
     end

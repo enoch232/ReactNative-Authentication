@@ -11,22 +11,18 @@ import {
 	StyleSheet
 
 }from "react-native";
-
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
 export default class DashBoardPage extends Component{
 	constructor(props){
 		super(props)
-		const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
+		
 		this.state = {
 			access_token: "",
-			dataSource: ds.cloneWithRows(['Post1', 'Post2']),
+			dataSource: ds.cloneWithRows([]),
 		}
 
 	}
 	async componentDidMount(){
-		// AsyncStorage.getItem("access_token").then((value) => {
-	 //        this.setState({access_token: value})
-	 //        console.log('http://localhost:3000/posts?'+this.state.access_token)
-	 //  })
 		try{
 			const access_token = await AsyncStorage.getItem("access_token")
 			let response = await fetch('http://localhost:3000/posts?access_token='+access_token ,{
@@ -37,30 +33,12 @@ export default class DashBoardPage extends Component{
 				}
 			})
 			let responseJson = await response.json()
-			console.log(responseJson)
+			this.setState({
+				dataSource: ds.cloneWithRows(responseJson)
+			})
 		}catch(error){
 			console.error(error)
 		}
-
-
-		// // console.log('http://localhost:3000/posts?'+this.state.access_token)
-		// return fetch('http://localhost:3000/posts?'+this.state.access_token ,{
-		// 	method: 'GET',
-		// 	headers: {
-		// 		'Accept': 'application/json',
-		// 		'Content-Type': 'application/json'
-		// 	}
-		// })
-		// .then((response)=>{
-		// 	return response.json()
-		// })
-		// .then((responseJson)=>{
-		// 	console.log(responseJson)
-		// })
-		// .catch((error)=>{
-		// 	console.error(error)
-		// })
-
 	}
 	_backPress(){
 		this.props.navigator.pop()
@@ -80,7 +58,7 @@ export default class DashBoardPage extends Component{
 				<Text>{this.state.access_token}</Text>
 				<ListView
 			    dataSource={this.state.dataSource}
-			    renderRow={(rowData) => <Text>{rowData}</Text>}
+			    renderRow={(rowData) => <Text>{rowData.title}</Text>}
 			  />
 			</View>
 		)

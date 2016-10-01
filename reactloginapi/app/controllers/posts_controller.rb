@@ -66,6 +66,7 @@ class PostsController < ApplicationController
 
   private
     def authenticate_access
+      binding.pry
       @user = User.find_by_access_token(params[:access_token])
       head :unauthorized unless @user
     end

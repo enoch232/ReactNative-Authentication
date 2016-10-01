@@ -22,17 +22,44 @@ export default class DashBoardPage extends Component{
 		}
 
 	}
-	componentDidMount(){
-		AsyncStorage.getItem("access_token").then((value) => {
-	        this.setState({access_token: value})
-	    }).catch((error)=>console.error(error)).done()
-		return fetch('http://localhost:3000/posts?'+this.state.access_token ,{
-			method: 'GET',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			}
-		})
+	async componentDidMount(){
+		// AsyncStorage.getItem("access_token").then((value) => {
+	 //        this.setState({access_token: value})
+	 //        console.log('http://localhost:3000/posts?'+this.state.access_token)
+	 //  })
+		try{
+			const access_token = await AsyncStorage.getItem("access_token")
+			let response = await fetch('http://localhost:3000/posts?access_token='+access_token ,{
+				method: 'GET',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				}
+			})
+			let responseJson = await response.json()
+			console.log(responseJson)
+		}catch(error){
+			console.error(error)
+		}
+
+
+		// // console.log('http://localhost:3000/posts?'+this.state.access_token)
+		// return fetch('http://localhost:3000/posts?'+this.state.access_token ,{
+		// 	method: 'GET',
+		// 	headers: {
+		// 		'Accept': 'application/json',
+		// 		'Content-Type': 'application/json'
+		// 	}
+		// })
+		// .then((response)=>{
+		// 	return response.json()
+		// })
+		// .then((responseJson)=>{
+		// 	console.log(responseJson)
+		// })
+		// .catch((error)=>{
+		// 	console.error(error)
+		// })
 
 	}
 	_backPress(){

@@ -15,13 +15,18 @@ import {
 export default class DashBoardPage extends Component{
 	constructor(props){
 		super(props)
-		// const ds = ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-		this.state = {access_token: ""}
+		const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
+		this.state = {
+			access_token: "",
+			dataSource: ds.cloneWithRows(['Post1', 'Post2']),
+		}
+
 	}
 	componentDidMount(){
 		AsyncStorage.getItem("access_token").then((value) => {
 	        this.setState({access_token: value})
 	    }).catch((error)=>console.error(error)).done()
+
 	}
 	_backPress(){
 		this.props.navigator.pop()
@@ -39,6 +44,10 @@ export default class DashBoardPage extends Component{
 					</View>
 				</View>
 				<Text>{this.state.access_token}</Text>
+				<ListView
+			    dataSource={this.state.dataSource}
+			    renderRow={(rowData) => <Text>{rowData}</Text>}
+			  />
 			</View>
 		)
 	}

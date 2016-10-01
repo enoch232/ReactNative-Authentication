@@ -66,7 +66,14 @@ export default class DashBoardPage extends Component{
 	}
 	_renderPostRows(rowData){
 		return(
-			<Text style = {styles.postRow}>{rowData.title}</Text>
+			<View style = {styles.postRow}>
+				<View style = {styles.postTop}>
+					<Text style = {styles.postTitle}>{rowData.title}</Text>
+					<TouchableOpacity  style = {styles.likeButton}  >
+						<Icon name = "thumbs-o-up" size = {15}/>
+					</TouchableOpacity>
+				</View>
+			</View>
 		)
 	}
 }
@@ -102,8 +109,21 @@ const styles = StyleSheet.create({
 		left: -10
 	},
 	postRow:{
-		textAlign: "center",
-		backgroundColor:"skyblue",
+		backgroundColor:"lightgray",
 		height: 60
+	},
+	postTitle:{
+		paddingTop: 5,
+		textAlign: "center",
+		fontSize: 15,
+		flex:4
+	},
+	likeButton:{
+		backgroundColor: "skyblue",
+		
+	},
+	postTop:{
+		flexDirection: "row",
+
 	}
 })

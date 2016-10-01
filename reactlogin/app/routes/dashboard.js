@@ -10,7 +10,8 @@ import {
 	AsyncStorage,
 	StyleSheet
 
-}from "react-native";
+}from "react-native"
+
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
 export default class DashBoardPage extends Component{
 	constructor(props){
@@ -58,9 +59,14 @@ export default class DashBoardPage extends Component{
 				<Text>{this.state.access_token}</Text>
 				<ListView
 			    dataSource={this.state.dataSource}
-			    renderRow={(rowData) => <Text>{rowData.title}</Text>}
+			    renderRow={(rowData) => {return this._renderPostRows(rowData)}}
 			  />
 			</View>
+		)
+	}
+	_renderPostRows(rowData){
+		return(
+			<Text style = {styles.postRow}>{rowData.title}</Text>
 		)
 	}
 }
@@ -77,7 +83,8 @@ const styles = StyleSheet.create({
 	headerContainer:{
 		flexDirection: "row",
 		justifyContent: "flex-start",
-		alignItems: "center"
+		alignItems: "center",
+		height:200
 	},
 	inputContainer:{
 		flex: 1,
@@ -93,5 +100,10 @@ const styles = StyleSheet.create({
 	backButton:{
 		color: "black",
 		left: -10
+	},
+	postRow:{
+		textAlign: "center",
+		backgroundColor:"skyblue",
+		height: 60
 	}
 })

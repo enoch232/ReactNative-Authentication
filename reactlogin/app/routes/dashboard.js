@@ -26,6 +26,13 @@ export default class DashBoardPage extends Component{
 		AsyncStorage.getItem("access_token").then((value) => {
 	        this.setState({access_token: value})
 	    }).catch((error)=>console.error(error)).done()
+		return fetch('http://localhost:3000/posts?'+this.state.access_token ,{
+			method: 'GET',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		})
 
 	}
 	_backPress(){
